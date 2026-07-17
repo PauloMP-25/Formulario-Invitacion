@@ -1,0 +1,1229 @@
+/* ==========================================================================
+   RESET & VARIABLES
+   ========================================================================== */
+:root {
+  --bg-space: #060913;
+  --bg-app: #0c1122;
+  --bg-card: rgba(18, 25, 47, 0.75);
+  --bg-card-hover: rgba(26, 36, 67, 0.85);
+  --bg-court: #111a33;
+  --bg-court-line: rgba(255, 255, 255, 0.8);
+  
+  --neon-cyan: #00f0ff;
+  --neon-orange: #ff6600;
+  --neon-lime: #39ff14;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-dark: #0f172a;
+  
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(0, 240, 255, 0.5);
+  
+  --shadow-neon-cyan: 0 0 15px rgba(0, 240, 255, 0.35);
+  --shadow-neon-orange: 0 0 15px rgba(255, 102, 0, 0.35);
+  --shadow-neon-lime: 0 0 15px rgba(57, 255, 20, 0.35);
+  --shadow-box: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+  --font-title: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-space);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 240, 255, 0.08) 0%, transparent 60%),
+    radial-gradient(circle at 100% 60%, rgba(255, 102, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(57, 255, 20, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ==========================================================================
+   MOBILE CONTENEDOR (MAX-WIDTH 480PX)
+   ========================================================================== */
+.mobile-wrapper {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: var(--bg-app);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.05);
+  border-left: 1px solid var(--border-glass);
+  border-right: 1px solid var(--border-glass);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container {
+  padding: 24px 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s ease;
+}
+
+.app-container.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   HEADER
+   ========================================================================== */
+.app-header {
+  text-align: center;
+  margin-bottom: 28px;
+  margin-top: 10px;
+}
+
+.logo-wrapper {
+  display: inline-block;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.25));
+  margin-bottom: 12px;
+}
+
+.volleyball-logo {
+  width: 64px;
+  height: 64px;
+  animation: logo-spin 16s linear infinite;
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.glow-title {
+  font-family: var(--font-title);
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.glow-title .accent-text {
+  color: var(--neon-orange);
+  text-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+  position: relative;
+  display: inline-block;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+/* Introducción e Invitación */
+.intro-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-glass);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.intro-description {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
+.event-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.event-detail-item {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location-link {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+.location-link:hover {
+  background: rgba(0, 240, 255, 0.06);
+  border-color: rgba(0, 240, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 240, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.location-link:active {
+  transform: translateY(0);
+}
+
+.detail-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.detail-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.detail-value {
+  font-family: var(--font-title);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 2px;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   FORM CONTROLS & LAYOUT
+   ========================================================================== */
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-label {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.field-hint {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-wrapper, .textarea-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  min-height: 48px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  outline: none;
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-neon-cyan), inset 0 0 10px rgba(0, 240, 255, 0.05);
+  background-color: rgba(18, 25, 47, 0.9);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* ==========================================================================
+   VALIDATION VISUAL FEEDBACK
+   ========================================================================== */
+.error-message {
+  display: none;
+  color: #ff453a;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-top: 6px;
+  padding-left: 4px;
+  animation: slide-down 0.25s ease-out;
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Soporte nativo para :user-invalid */
+.form-input:user-invalid,
+.form-textarea:user-invalid,
+.form-input.user-invalid-fallback,
+.form-textarea.user-invalid-fallback {
+  border-color: var(--neon-orange);
+  background-color: rgba(255, 102, 0, 0.03);
+  box-shadow: 0 0 8px rgba(255, 102, 0, 0.15);
+}
+
+.form-input:user-invalid + .error-message,
+.form-textarea:user-invalid + .error-message,
+.form-input.user-invalid-fallback + .error-message,
+.form-textarea.user-invalid-fallback + .error-message {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.form-input:user-valid,
+.form-textarea:user-valid,
+.form-input.user-valid-fallback,
+.form-textarea.user-valid-fallback {
+  border-color: rgba(57, 255, 20, 0.5);
+  background-color: rgba(57, 255, 20, 0.01);
+  box-shadow: 0 0 8px rgba(57, 255, 20, 0.05);
+}
+
+/* ==========================================================================
+   REGLAS VÓLEY SHOT CARD
+   ========================================================================== */
+.rules-section {
+  margin-top: 6px;
+}
+
+.rules-card {
+  background: linear-gradient(135deg, rgba(20, 27, 45, 0.9) 0%, rgba(13, 18, 32, 0.95) 100%);
+  border: 1px solid rgba(255, 102, 0, 0.25);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 102, 0, 0.03);
+  margin-bottom: 12px;
+}
+
+.rules-header {
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 10px;
+}
+
+.rules-badge {
+  font-family: var(--font-title);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--neon-orange);
+  background-color: rgba(255, 102, 0, 0.1);
+  padding: 3px 8px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 102, 0, 0.2);
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.rules-heading {
+  font-family: var(--font-title);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.rules-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rules-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.rule-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rule-text {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* Checkbox Custom */
+.checkbox-wrapper {
+  padding-left: 4px;
+}
+
+.custom-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+  min-height: 48px;
+  padding: 6px 0;
+}
+
+.checkbox-box-container {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkbox-box-container input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  margin: 0;
+  z-index: 2;
+}
+
+.checkbox-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-glass);
+  border-radius: 6px;
+  transition: var(--transition-smooth);
+  z-index: 1;
+}
+
+.checkbox-box-container input[type="checkbox"]:focus ~ .checkbox-visual {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+.checkbox-box-container input[type="checkbox"]:checked ~ .checkbox-visual {
+  background-color: var(--neon-cyan);
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+.checkbox-visual::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--text-dark);
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg) scale(0);
+  transition: var(--transition-bounce);
+}
+
+.checkbox-box-container input[type="checkbox"]:checked ~ .checkbox-visual::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.checkbox-label-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.checkbox-error {
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   RSVP RADIO GROUP (ASISTENCIA CHIPS)
+   ========================================================================== */
+.radio-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.radio-group {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.radio-card {
+  position: relative;
+  display: block;
+  min-height: 52px;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-glass);
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  user-select: none;
+}
+
+.radio-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+}
+
+.rsvp-icon {
+  font-size: 1.15rem;
+}
+
+.rsvp-text {
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+}
+
+/* Efectos Hover & Focus */
+.radio-card:hover {
+  background-color: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Focus outline accesible */
+.radio-card:has(input[type="radio"]:focus-visible) {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+/* Estados Seleccionados por Tipo */
+/* SÍ VOY (Verde Lime) */
+.radio-card.rsvp-yes:has(input[type="radio"]:checked) {
+  border-color: var(--neon-lime);
+  background-color: rgba(57, 255, 20, 0.08);
+  box-shadow: var(--shadow-neon-lime);
+}
+.radio-card.rsvp-yes:has(input[type="radio"]:checked) .rsvp-text {
+  color: var(--neon-lime);
+}
+
+/* TAL VEZ (Cyan) */
+.radio-card.rsvp-maybe:has(input[type="radio"]:checked) {
+  border-color: var(--neon-cyan);
+  background-color: rgba(0, 240, 255, 0.08);
+  box-shadow: var(--shadow-neon-cyan);
+}
+.radio-card.rsvp-maybe:has(input[type="radio"]:checked) .rsvp-text {
+  color: var(--neon-cyan);
+}
+
+/* NO VOY (Naranja / Rojo) */
+.radio-card.rsvp-no:has(input[type="radio"]:checked) {
+  border-color: var(--neon-orange);
+  background-color: rgba(255, 102, 0, 0.08);
+  box-shadow: var(--shadow-neon-orange);
+}
+.radio-card.rsvp-no:has(input[type="radio"]:checked) .rsvp-text {
+  color: var(--neon-orange);
+}
+
+.radio-error {
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   POSITION SELECTOR BUTTON (CANCHA TRIGGER)
+   ========================================================================== */
+.court-trigger-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 52px;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: var(--transition-smooth);
+  user-select: none;
+  outline: none;
+}
+
+.court-trigger-btn:hover {
+  background-color: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.court-trigger-btn:focus-visible {
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+.court-icon {
+  font-size: 1.25rem;
+  margin-right: 12px;
+}
+
+.btn-text {
+  flex-grow: 1;
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.selected-badge {
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  background-color: var(--neon-cyan);
+  padding: 4px 10px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-neon-cyan);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: var(--transition-bounce);
+}
+
+/* Cuando ya tiene una posición seleccionada */
+.court-trigger-btn.has-value {
+  border-color: var(--neon-lime);
+}
+.court-trigger-btn.has-value .selected-badge {
+  background-color: var(--neon-lime);
+  box-shadow: var(--shadow-neon-lime);
+}
+
+/* ==========================================================================
+   SUBMIT BUTTON
+   ========================================================================== */
+.submit-btn {
+  position: relative;
+  width: 100%;
+  min-height: 52px;
+  background: linear-gradient(135deg, #00d2ff 0%, #0072ff 100%);
+  border: none;
+  border-radius: 14px;
+  color: var(--text-primary);
+  font-family: var(--font-title);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+  transition: var(--transition-bounce);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 114, 255, 0.6), 0 0 15px rgba(0, 240, 255, 0.2);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+}
+
+.submit-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.5), 0 8px 24px rgba(0, 114, 255, 0.4);
+}
+
+.submit-text {
+  position: relative;
+  z-index: 2;
+}
+
+.submit-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.submit-btn:hover .submit-glow {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   MODAL DIALOG - MITAD DE CANCHA
+   ========================================================================== */
+dialog {
+  border: none;
+  background: transparent;
+  max-width: 90vw;
+  width: 420px;
+  margin: auto;
+  outline: none;
+}
+
+/* Backdrop para dialog modal */
+dialog::backdrop {
+  background-color: rgba(3, 6, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: backdrop-fade-in 0.4s ease-out;
+}
+
+@keyframes backdrop-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Animación del Modal */
+dialog[open] {
+  animation: modal-zoom-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modal-zoom-in {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-container {
+  background: linear-gradient(135deg, rgba(13, 19, 36, 0.95) 0%, rgba(8, 12, 23, 0.98) 100%);
+  border: 1px solid var(--border-glass);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(0, 240, 255, 0.1);
+  border-radius: 24px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.modal-title {
+  font-family: var(--font-title);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.modal-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+/* Leyenda de la red */
+.net-indicator {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+  padding: 0 4px;
+}
+
+.net-post {
+  width: 5px;
+  height: 24px;
+  background: linear-gradient(to right, #000000, #444444, #111111);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+}
+
+.net-grid {
+  flex-grow: 1;
+  height: 12px;
+  margin: 0 4px;
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.15) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.4) 2px, transparent 2px),
+    linear-gradient(0deg, transparent 6px, rgba(255, 255, 255, 0.4) 6px, rgba(255,255,255,0.4) 8px, transparent 8px);
+  background-size: 8px 12px, 100% 12px;
+  border-top: 3.5px solid #ff453a; /* Banda superior roja del net */
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 8px rgba(255, 69, 58, 0.25);
+  transform: translateY(2px); /* Alinear con los postes */
+}
+
+/* ==========================================================================
+   CANCHA DE VÓLEY (GRID VISUAL DE 6 ZONAS)
+   ========================================================================== */
+.court-visualizer {
+  background-color: #ffffff; /* Las líneas de la cancha son de color blanco intenso */
+  border: 4.5px solid #ffffff; /* Líneas de límite de la cancha */
+  border-radius: 14px;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(0, 0, 0, 0.2);
+  gap: 6px; /* Separación blanca entre filas, actúa como línea visual */
+  overflow: hidden;
+}
+
+.court-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px; /* Separación blanca entre columnas */
+  z-index: 2;
+}
+
+/* Zona Delantera (Relación 1.2fr en altura) */
+.front-row {
+  flex: 1.2;
+}
+
+/* Zona Trasera (Relación 2fr en altura) */
+.back-row {
+  flex: 2;
+}
+
+/* Línea de 3 metros */
+.attack-line-visual {
+  height: 6px; /* Ancho reglamentario de la línea de ataque */
+  background-color: #ffffff;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.attack-line-text {
+  font-family: var(--font-title);
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.12em;
+  background-color: #0c1122; /* Contraste en el texto */
+  padding: 1px 6px;
+  border-radius: 4px;
+  transform: translateY(-1px);
+  display: none; /* Ocultar para simplificar el look */
+}
+
+/* Botones de Zonas de Cancha */
+.court-zone {
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  padding: 8px 4px;
+  outline: none;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Fila delantera: Fondo Verde */
+.front-row .court-zone {
+  background-color: #3ebd43;
+  color: #060913;
+}
+
+/* Fila trasera: Fondo Amarillo/Naranja */
+.back-row .court-zone {
+  background-color: #ffa726;
+  color: #060913;
+}
+
+.court-zone:hover {
+  transform: scale(1.03);
+  filter: brightness(1.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.court-zone:focus-visible {
+  box-shadow: 0 0 0 3px var(--neon-cyan);
+}
+
+.zone-number {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #060913;
+  transition: var(--transition-bounce);
+  opacity: 0.95;
+}
+
+.zone-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #060913;
+  text-align: center;
+  line-height: 1.1;
+}
+
+.zone-role {
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: rgba(6, 9, 19, 0.75);
+  text-align: center;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+/* Estado Seleccionado de la Zona (Brillante Cian Neón) */
+.court-zone.selected {
+  background-color: var(--neon-cyan) !important;
+  color: var(--text-dark) !important;
+  box-shadow: var(--shadow-neon-cyan), 0 0 20px rgba(0, 240, 255, 0.5);
+  transform: scale(1.04);
+  z-index: 5;
+}
+
+.court-zone.selected .zone-number,
+.court-zone.selected .zone-name,
+.court-zone.selected .zone-role {
+  color: var(--text-dark) !important;
+}
+
+.court-zone.selected .zone-number {
+  transform: scale(1.12);
+}
+
+/* Footer del Modal */
+.modal-footer {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.modal-footer button {
+  flex: 1;
+}
+
+.close-modal-btn {
+  min-height: 48px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.close-modal-btn:hover {
+  background-color: rgba(255, 69, 58, 0.1);
+  border-color: rgba(255, 69, 58, 0.2);
+  color: #ff453a;
+}
+
+.close-modal-btn:focus-visible {
+  outline: none;
+  border-color: var(--neon-cyan);
+}
+
+.primary-btn {
+  min-height: 48px;
+  background: linear-gradient(135deg, #00d2ff 0%, #0072ff 100%);
+  border: none;
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+  transition: var(--transition-bounce);
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 114, 255, 0.6), 0 0 10px rgba(0, 240, 255, 0.25);
+}
+
+.primary-btn:active {
+  transform: translateY(1px);
+}
+
+.primary-btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.5), 0 4px 15px rgba(0, 114, 255, 0.4);
+}
+
+/* ==========================================================================
+   PANTALLA DE ÉXITO (ANIMADA E INTERACTIVA)
+   ========================================================================== */
+.success-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-app);
+  z-index: 100;
+  padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  animation: screen-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.success-screen.hidden {
+  display: none !important;
+}
+
+@keyframes screen-fade-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Animación 3D del Balón de Voley en CSS */
+.volleyball-animation-wrapper {
+  position: relative;
+  width: 120px;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  animation: ball-bounce 2.2s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+}
+
+.volleyball-ball-animated {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+  animation: ball-rotation 5s linear infinite;
+}
+
+.ball-shadow {
+  position: absolute;
+  bottom: 10px;
+  width: 50px;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  filter: blur(4px);
+  animation: shadow-size 2.2s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+}
+
+/* Animaciones del balón y sombra */
+@keyframes ball-bounce {
+  0%, 100% { transform: translateY(-50px) scaleY(1) scaleX(1); }
+  45% { transform: translateY(0px) scaleY(1) scaleX(1); }
+  50% { transform: translateY(5px) scaleY(0.85) scaleX(1.1); }
+  55% { transform: translateY(0px) scaleY(1) scaleX(1); }
+}
+
+@keyframes ball-rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shadow-size {
+  0%, 100% { transform: scale(0.4); opacity: 0.2; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.success-title {
+  font-family: var(--font-title);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--neon-lime);
+  text-shadow: var(--shadow-neon-lime);
+  text-align: center;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.success-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.45;
+  margin-bottom: 24px;
+  padding: 0 10px;
+}
+
+/* Tarjeta Resumen */
+.summary-card {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(20, 27, 45, 0.6) 0%, rgba(12, 18, 33, 0.7) 100%);
+  border: 1px solid var(--border-glass);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: var(--shadow-box);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 24px;
+}
+
+.summary-title {
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  gap: 12px;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.summary-value {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+}
+
+#sum-position {
+  color: var(--neon-cyan);
+}
+
+#sum-rsvp {
+  color: var(--neon-lime);
+}
+
+.success-actions {
+  width: 100%;
+  margin-top: auto;
+}
+
+.secondary-btn {
+  width: 100%;
+  min-height: 48px;
+  background-color: transparent;
+  border: 1.5px solid var(--border-glass);
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.secondary-btn:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+}
+
+.secondary-btn:focus-visible {
+  outline: none;
+  border-color: var(--neon-cyan);
+  box-shadow: var(--shadow-neon-cyan);
+}

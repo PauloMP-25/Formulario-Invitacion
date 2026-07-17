@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vóley Shot - Confirmación de Asistencia</title>
+  
+  <!-- Tipografía moderna Outfit para títulos y números, Inter para textos de lectura -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+
+  <!-- Contenedor principal que simula una pantalla de celular centrada -->
+  <div class="mobile-wrapper">
+    <main class="app-container" id="app-main-content">
+      
+      <!-- Encabezado con estética deportiva y neón -->
+      <header class="app-header">
+        <div class="logo-wrapper">
+          <img class="volleyball-logo" src="pelota.png" alt="Balón de Vóley Mikasa">
+        </div>
+        <h1 class="glow-title">VÓLEY <span class="accent-text">SHOT</span></h1>
+        <p class="subtitle">Torneo, Amistad & Tragos</p>
+      </header>
+
+      <!-- Introducción y Detalles del Evento -->
+      <div class="intro-card">
+        <p class="intro-description">
+          ¡Hola! Te invito a pasar una noche increíble de vóley, amistad y risas para celebrar mi cumpleaños. Jugaremos un torneo amistoso de 6 contra 6 con la divertida regla especial del Vóley Shot.
+        </p>
+        <div class="event-details-grid">
+          <div class="event-detail-item">
+            <span class="detail-icon" aria-hidden="true">👥</span>
+            <div class="detail-content">
+              <span class="detail-label">Equipos</span>
+              <span class="detail-value">Total de equipos: 4</span>
+            </div>
+          </div>
+          <div class="event-detail-item">
+            <span class="detail-icon" aria-hidden="true">📅</span>
+            <div class="detail-content">
+              <span class="detail-label">Fecha</span>
+              <span class="detail-value">Viernes 24 o Sábado 25 de Julio</span>
+            </div>
+          </div>
+          <div class="event-detail-item">
+            <span class="detail-icon" aria-hidden="true">⏰</span>
+            <div class="detail-content">
+              <span class="detail-label">Horario</span>
+              <span class="detail-value">8:00 PM a 12:00 PM</span>
+            </div>
+          </div>
+          <a class="event-detail-item location-link" href="https://www.google.com/maps/place/Parque+Raul+Porras/@-14.079769,-75.7356125,3a,75y,90t/data=!3m8!1e2!3m6!1sCIHM0ogKEICAgICUtaqGjwE!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAHRPTWm23YlSqUWEjlfeUcJkAz5vprMV2H-8Z1O7UhhWH-63sqXtM5lm0SXDfoZFCUE4Kfjep5_waWPC-Zf4AEw86eeoWF5EPoxI1dOTm9ISqUZDVWPB0Hpn0BbWoKdbqe5sBlv0jc6F%3Dw114-h86-k-no!7i4160!8i3120!4m7!3m6!1s0x9110e3010ed6e00f:0xd0edff2d37d7ec04!8m2!3d-14.079769!4d-75.7356125!10e5!16s%2Fg%2F11gxrptrvx?entry=ttu&g_ep=EgoyMDI2MDcxNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer">
+            <span class="detail-icon" aria-hidden="true">📍</span>
+            <div class="detail-content">
+              <span class="detail-label">Lugar (Ver mapa)</span>
+              <span class="detail-value">Parque Raúl Porras (espalda Fiscalía Panamericana)</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Formulario Principal -->
+      <form id="rsvp-form" class="rsvp-form" novalidate>
+        
+        <!-- Campo: Nombre Completo -->
+        <div class="form-group">
+          <label for="fullname" class="form-label">Nombre Completo</label>
+          <span id="fullname-hint" class="field-hint">Ingresa tu nombre y apellido para el fixture</span>
+          <div class="input-wrapper">
+            <input 
+              type="text" 
+              id="fullname" 
+              name="fullname" 
+              required 
+              autocomplete="name" 
+              aria-describedby="fullname-hint"
+              aria-errormessage="fullname-error"
+              placeholder="Ej. Carlos Mendoza"
+              class="form-input"
+            >
+            <div id="fullname-error" class="error-message" role="alert">
+              <span aria-hidden="true">⚠️</span> Debes ingresar tu nombre completo.
+            </div>
+          </div>
+        </div>
+
+        <!-- Campo: Teléfono -->
+        <div class="form-group">
+          <label for="phone" class="form-label">Teléfono de Contacto</label>
+          <span id="phone-hint" class="field-hint">Para coordinar con tu equipo de vóley</span>
+          <div class="input-wrapper">
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              inputmode="tel" 
+              required 
+              autocomplete="tel" 
+              pattern="^[0-9]{9}$"
+              aria-describedby="phone-hint"
+              aria-errormessage="phone-error"
+              placeholder="Ej. 987654321"
+              class="form-input"
+            >
+            <div id="phone-error" class="error-message" role="alert">
+              <span aria-hidden="true">⚠️</span> Ingresa un número de celular válido de 9 dígitos.
+            </div>
+          </div>
+        </div>
+
+        <!-- Sección de Reglas Vóley Shot -->
+        <section class="rules-section" aria-labelledby="rules-title">
+          <div class="rules-card">
+            <div class="rules-header">
+              <span class="rules-badge">MODO DE JUEGO</span>
+              <h2 id="rules-title" class="rules-heading">Reglas "Vóley Shot" 🍸</h2>
+            </div>
+            <ul class="rules-list">
+              <li>
+                <span class="rule-icon">🤝</span>
+                <span class="rule-text"><strong>Coordinación:</strong> Cada equipo debe coordinarse para traer su botella o trago favorito. ¡Que nadie juegue con la garganta seca!</span>
+              </li>
+              <li>
+                <span class="rule-icon">🥃</span>
+                <span class="rule-text"><strong>Pena máxima:</strong> El equipo que pierda un set se toma un vaso (shot). ¡El castigo del perdedor es brindar!</span>
+              </li>
+              <li>
+                <span class="rule-icon">🏐</span>
+                <span class="rule-text"><strong>Reglamento:</strong> Se respetarán las reglas básicas del vóley y se cobrarán las faltas evidentes (dobles, retención) para asegurar un juego limpio.</span>
+              </li>
+              <li>
+                <span class="rule-icon">🚫</span>
+                <span class="rule-text"><strong>Malla sagrada:</strong> Se jugará sin tocar la malla. Si la tocas, ¡te toca tomar un shot adicional de penalización!</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Checkbox para aceptar las reglas -->
+          <div class="checkbox-wrapper">
+            <label class="custom-checkbox" for="accept-rules">
+              <div class="checkbox-box-container">
+                <input 
+                  type="checkbox" 
+                  id="accept-rules" 
+                  name="acceptRules" 
+                  required 
+                  aria-errormessage="accept-rules-error"
+                >
+                <span class="checkbox-visual" aria-hidden="true"></span>
+              </div>
+              <span class="checkbox-label-text">Acepto las reglas de Vóley Shot y prometo no quejarme si me toca tomar.</span>
+            </label>
+            <div id="accept-rules-error" class="error-message checkbox-error" role="alert">
+              <span aria-hidden="true">⚠️</span> Debes aceptar las reglas del juego para participar.
+            </div>
+          </div>
+        </section>
+
+        <!-- Campo: Confirmación de Asistencia -->
+        <div class="form-group">
+          <fieldset class="radio-fieldset">
+            <legend class="form-label">¿Confirmas tu asistencia?</legend>
+            <div class="radio-group">
+              
+              <!-- Opción: SÍ -->
+              <label class="radio-card rsvp-yes" for="rsvp-yes">
+                <input 
+                  type="radio" 
+                  id="rsvp-yes" 
+                  name="attendance" 
+                  value="Sí" 
+                  required
+                >
+                <div class="radio-card-content">
+                  <span class="rsvp-icon">🔥</span>
+                  <span class="rsvp-text">Sí, voy</span>
+                </div>
+              </label>
+
+              <!-- Opción: TAL VEZ -->
+              <label class="radio-card rsvp-maybe" for="rsvp-maybe">
+                <input 
+                  type="radio" 
+                  id="rsvp-maybe" 
+                  name="attendance" 
+                  value="Tal vez" 
+                >
+                <div class="radio-card-content">
+                  <span class="rsvp-icon">⏳</span>
+                  <span class="rsvp-text">Tal vez</span>
+                </div>
+              </label>
+
+              <!-- Opción: NO -->
+              <label class="radio-card rsvp-no" for="rsvp-no">
+                <input 
+                  type="radio" 
+                  id="rsvp-no" 
+                  name="attendance" 
+                  value="No" 
+                >
+                <div class="radio-card-content">
+                  <span class="rsvp-icon">😢</span>
+                  <span class="rsvp-text">No puedo</span>
+                </div>
+              </label>
+
+            </div>
+            <!-- Mensaje de error para el fieldset de asistencia -->
+            <div id="attendance-error" class="error-message radio-error" role="alert">
+              <span aria-hidden="true">⚠️</span> Selecciona una opción de asistencia.
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- Campo: Selector de Posición en Cancha -->
+        <div class="form-group">
+          <label class="form-label">Posición Favorita en Cancha</label>
+          <span id="position-hint" class="field-hint">Elige la zona de la cancha que prefieres defender o atacar</span>
+          
+          <button 
+            type="button" 
+            id="open-court-btn" 
+            class="court-trigger-btn"
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            aria-describedby="position-hint"
+          >
+            <span class="court-icon" aria-hidden="true">🗺️</span>
+            <span class="btn-text" id="court-btn-text">Seleccionar Posición</span>
+            <span class="selected-badge" id="selected-badge">Ninguna</span>
+          </button>
+          
+          <!-- Input oculto para almacenar el valor de la posición elegida -->
+          <input 
+            type="hidden" 
+            name="playerPosition" 
+            id="hidden-position" 
+            required 
+            aria-errormessage="position-error"
+          >
+          
+          <div id="position-error" class="error-message" role="alert">
+            <span aria-hidden="true">⚠️</span> Debes elegir una posición táctica de la cancha.
+          </div>
+        </div>
+
+        <!-- Campo: Notas / Comentarios -->
+        <div class="form-group">
+          <label for="comments" class="form-label">Notas / Comentarios</label>
+          <span id="comments-hint" class="field-hint">¿Alguna restricción o trago en particular que llevarás?</span>
+          <div class="textarea-wrapper">
+            <textarea 
+              id="comments" 
+              name="comments" 
+              rows="3" 
+              placeholder="Ej. Llevaré Pisco y Ginger Ale. ¡Tengan listos los limones!"
+              aria-describedby="comments-hint"
+              class="form-textarea"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Botón de Envío -->
+        <button type="submit" id="submit-btn" class="submit-btn">
+          <span class="submit-text">Enviar Confirmación</span>
+          <span class="submit-glow"></span>
+        </button>
+
+      </form>
+    </main>
+
+    <!-- Pantalla de Confirmación de Éxito (Animada e Interactiva, inicialmente oculta) -->
+    <div id="success-screen" class="success-screen hidden" aria-live="polite" aria-hidden="true">
+      <div class="success-content">
+        <!-- Balón Mikasa animado en 3D con CSS -->
+        <div class="volleyball-animation-wrapper">
+          <img class="volleyball-ball-animated" src="pelota.png" alt="Balón de Vóley Mikasa Animado">
+          <div class="ball-shadow"></div>
+        </div>
+
+        <h1 class="success-title">¡REGISTRO EXITOSO!</h1>
+        <p class="success-subtitle">Tu punto ya está marcado en la planilla. Prepárate para el Vóley Shot.</p>
+
+        <!-- Tarjeta de Resumen en Glassmorphism -->
+        <div class="summary-card">
+          <h2 class="summary-title">Resumen del Jugador</h2>
+          
+          <div class="summary-row">
+            <span class="summary-label">Nombre</span>
+            <span class="summary-value" id="sum-name">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Teléfono</span>
+            <span class="summary-value" id="sum-phone">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Asistencia</span>
+            <span class="summary-value" id="sum-rsvp">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Posición</span>
+            <span class="summary-value" id="sum-position">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Comentarios</span>
+            <span class="summary-value" id="sum-comments">-</span>
+          </div>
+        </div>
+
+        <div class="success-actions">
+          <button type="button" id="edit-rsvp-btn" class="secondary-btn">
+            Modificar mis datos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal con la mitad de la cancha de voley -->
+  <!-- Usamos closedby="any" para que se cierre con Esc o click en el backdrop -->
+  <dialog id="position-modal" closedby="any" aria-labelledby="modal-title">
+    <div class="modal-container">
+      
+      <header class="modal-header">
+        <h2 id="modal-title" class="modal-title">Selector de Posición</h2>
+        <p class="modal-subtitle">Toca hasta 2 posiciones de la cancha donde te gustaría jugar</p>
+      </header>
+
+      <!-- Indicador de la red -->
+      <div class="net-indicator">
+        <span class="net-post net-post-left"></span>
+        <span class="net-grid"></span>
+        <span class="net-post net-post-right"></span>
+      </div>
+
+      <!-- Representación visual de la mitad de cancha de voley -->
+      <div class="court-visualizer" id="court-visualizer" role="group" aria-label="Mitad de cancha de vóley">
+        
+        <!-- Zona Delantera (Ataque) -->
+        <div class="court-row front-row">
+          <!-- Posición 4: Punta (Atacante / Receptor) -->
+          <button 
+            type="button" 
+            class="court-zone zone-4" 
+            data-position="4" 
+            data-label="Posición 4 - Punta (Atacante / Receptor)"
+            aria-label="Posición 4, Punta, Atacante y Receptor"
+          >
+            <span class="zone-number">4</span>
+            <span class="zone-name">Punta</span>
+            <span class="zone-role">Atacante / Receptor</span>
+          </button>
+
+          <!-- Posición 3: Central (Bloqueador Central / Atacante Rápido) -->
+          <button 
+            type="button" 
+            class="court-zone zone-3" 
+            data-position="3" 
+            data-label="Posición 3 - Central (Bloqueador Central / Atacante Rápido)"
+            aria-label="Posición 3, Central, Bloqueador Central y Atacante Rápido"
+          >
+            <span class="zone-number">3</span>
+            <span class="zone-name">Central</span>
+            <span class="zone-role">Bloqueador / Rápido</span>
+          </button>
+
+          <!-- Posición 2: Armador (Colocador / Creador de juego) -->
+          <button 
+            type="button" 
+            class="court-zone zone-2" 
+            data-position="2" 
+            data-label="Posición 2 - Armador (Colocador / Creador de juego)"
+            aria-label="Posición 2, Armador, Colocador y Creador de juego"
+          >
+            <span class="zone-number">2</span>
+            <span class="zone-name">Armador</span>
+            <span class="zone-role">Colocador / Creador</span>
+          </button>
+        </div>
+
+        <!-- Línea de 3 metros (Ataque / Defensa) -->
+        <div class="attack-line-visual" aria-hidden="true">
+          <span class="attack-line-text">LÍNEA DE ATAQUE (3m)</span>
+        </div>
+
+        <!-- Zona Trasera (Defensa) -->
+        <div class="court-row back-row">
+          <!-- Posición 5: Defensa (Zaguero Izquierdo) -->
+          <button 
+            type="button" 
+            class="court-zone zone-5" 
+            data-position="5" 
+            data-label="Posición 5 - Defensa (Zaguero Izquierdo)"
+            aria-label="Posición 5, Defensa, Zaguero Izquierdo"
+          >
+            <span class="zone-number">5</span>
+            <span class="zone-name">Defensa</span>
+            <span class="zone-role">Zaguero Izquierdo</span>
+          </button>
+
+          <!-- Posición 6: Líbero (Especialista defensivo) -->
+          <button 
+            type="button" 
+            class="court-zone zone-6" 
+            data-position="6" 
+            data-label="Posición 6 - Líbero (Especialista defensivo)"
+            aria-label="Posición 6, Líbero, Especialista defensivo"
+          >
+            <span class="zone-number">6</span>
+            <span class="zone-name">Líbero</span>
+            <span class="zone-role">Especialista Def.</span>
+          </button>
+
+          <!-- Posición 1: Opuesto (Atacante opuesto al armador) -->
+          <button 
+            type="button" 
+            class="court-zone zone-1" 
+            data-position="1" 
+            data-label="Posición 1 - Opuesto (Atacante opuesto al armador)"
+            aria-label="Posición 1, Opuesto, Atacante opuesto al armador"
+          >
+            <span class="zone-number">1</span>
+            <span class="zone-name">Opuesto</span>
+            <span class="zone-role">Atacante Opuesto</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Acciones del Modal -->
+      <footer class="modal-footer">
+        <button type="button" id="close-modal-btn" class="close-modal-btn">
+          Cancelar y cerrar
+        </button>
+        <button type="button" id="confirm-position-btn" class="primary-btn">
+          Confirmar selección
+        </button>
+      </footer>
+
+    </div>
+  </dialog>
+
+</body>
+</html>
