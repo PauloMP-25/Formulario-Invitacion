@@ -157,6 +157,16 @@ document.addEventListener('DOMContentLoaded', () => {
       msgText = 'Espero que vengan tú y Christina. 🏐';
     } else if (cleanName === 'christina' || cleanName === 'cristina') {
       msgText = '¡No falten tú y Daniel! 🏐';
+    } else if (cleanName === 'lucas') {
+      msgText = 'Dame show mano. 🤙';
+    } else if (cleanName === 'connie') {
+      msgText = 'Falta a tu trabajo y ven a jugar. 🤫';
+    } else if (cleanName === 'juan') {
+      msgText = 'no juegues solo 3 partidos y te vayas pues. 🙄';
+    } else if (cleanName === 'rai' || cleanName === 'rey') {
+      msgText = 'Demuestra tu talento. ⚡';
+    } else if (cleanName === 'yonsu') {
+      msgText = 'Espero que asistas. 📅';
     } else {
       msgText = `¡Qué bueno que te unas, ${trimmedName}! Prepárate para el juego. 👋`;
     }
