@@ -68,24 +68,28 @@
       <!-- Formulario Principal -->
       <form id="rsvp-form" class="rsvp-form" novalidate>
         
-        <!-- Campo: Nombre Completo -->
+        <!-- Campo: Nombre -->
         <div class="form-group">
-          <label for="fullname" class="form-label">Nombre Completo</label>
-          <span id="fullname-hint" class="field-hint">Ingresa tu nombre y apellido para el fixture</span>
+          <label for="fullname" class="form-label">Nombre</label>
+          <span id="fullname-hint" class="field-hint">Ingresa tu nombre para la planilla</span>
           <div class="input-wrapper">
-            <input 
-              type="text" 
-              id="fullname" 
-              name="fullname" 
-              required 
-              autocomplete="name" 
-              aria-describedby="fullname-hint"
-              aria-errormessage="fullname-error"
-              placeholder="Ej. Carlos Mendoza"
-              class="form-input"
-            >
+            <div class="name-confirm-group">
+              <input 
+                type="text" 
+                id="fullname" 
+                name="fullname" 
+                required 
+                autocomplete="given-name" 
+                aria-describedby="fullname-hint"
+                aria-errormessage="fullname-error"
+                placeholder="Ej. Carlos"
+                class="form-input"
+              >
+              <button type="button" id="confirm-name-btn" class="confirm-name-btn">Confirmar</button>
+            </div>
+            <div id="name-message" class="name-message hidden" role="status"></div>
             <div id="fullname-error" class="error-message" role="alert">
-              <span aria-hidden="true">⚠️</span> Debes ingresar tu nombre completo.
+              <span aria-hidden="true">⚠️</span> Debes ingresar tu nombre y confirmarlo.
             </div>
           </div>
         </div>

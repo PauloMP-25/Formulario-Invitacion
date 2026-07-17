@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Elementos del DOM - Formulario
   const rsvpForm = document.getElementById('rsvp-form');
   const fullnameInput = document.getElementById('fullname');
+  const confirmNameBtn = document.getElementById('confirm-name-btn');
+  const nameMessage = document.getElementById('name-message');
   const phoneInput = document.getElementById('phone');
   const acceptRulesCheckbox = document.getElementById('accept-rules');
   const hiddenPositionInput = document.getElementById('hidden-position');
@@ -74,7 +76,10 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const prefillForm = (data) => {
-    if (data.fullname) fullnameInput.value = data.fullname;
+    if (data.fullname) {
+      fullnameInput.value = data.fullname;
+      handleNameConfirmation(data.fullname);
+    }
     if (data.phone) phoneInput.value = data.phone;
     if (data.acceptRules) acceptRulesCheckbox.checked = data.acceptRules;
     if (data.comments) commentsTextarea.value = data.comments;
@@ -92,6 +97,73 @@ document.addEventListener('DOMContentLoaded', () => {
       updatePositionUIFromCodes(codes);
     }
   };
+
+  /* ==========================================================================
+     LÓGICA DE CONFIRMACIÓN DE NOMBRE Y MENSAJES PERSONALIZADOS
+     ========================================================================== */
+  const handleNameConfirmation = (nameVal) => {
+    const trimmedName = nameVal.trim();
+    if (trimmedName.length < 2) {
+      const errorContainer = document.getElementById('fullname-error');
+      errorContainer.innerHTML = '<span aria-hidden="true">⚠️</span> Debes ingresar tu nombre y confirmarlo.';
+      errorContainer.style.display = 'flex';
+      fullnameInput.setAttribute('aria-invalid', 'true');
+      fullnameInput.classList.add('user-invalid-fallback');
+      return false;
+    }
+
+    const errorContainer = document.getElementById('fullname-error');
+    errorContainer.style.display = 'none';
+    fullnameInput.removeAttribute('aria-invalid');
+    fullnameInput.classList.remove('user-invalid-fallback');
+    fullnameInput.classList.add('user-valid-fallback');
+
+    fullnameInput.readOnly = true;
+    confirmNameBtn.disabled = true;
+    confirmNameBtn.textContent = '🔒 Fijado';
+
+    const cleanName = trimmedName.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const exactNameLower = trimmedName.toLowerCase();
+    
+    let msgText = '';
+    let isLove = false;
+
+    if (exactNameLower === 'nikol') {
+      msgText = '¡Gracias por venir, amorcito! 💖💑';
+      isLove = true;
+    } else if (cleanName === 'lia') {
+      msgText = 'espero que juegues muy bien. 🏐';
+    } else if (cleanName === 'joan' || cleanName === 'jhoan') {
+      msgText = '¡Go show! 🚀';
+    } else if (cleanName === 'luis') {
+      msgText = 'Espero no ser del mismo equipo para darte en la cara. 👊😜';
+    } else if (cleanName === 'renzo') {
+      msgText = 'Espero que asistas. 📅';
+    } else if (cleanName === 'adrian') {
+      msgText = '¡Sale su volley shot! 🍹';
+    } else if (cleanName === 'grelly') {
+      msgText = 'Espero enfrentarnos, cuñadita. 🙌';
+    } else {
+      msgText = `¡Qué bueno que te unas, ${trimmedName}! Prepárate para el juego. 👋`;
+    }
+
+    nameMessage.textContent = msgText;
+    nameMessage.className = 'name-message';
+    if (isLove) {
+      nameMessage.classList.add('message-love');
+    }
+
+    return true;
+  };
+
+  confirmNameBtn.addEventListener('click', () => {
+    handleNameConfirmation(fullnameInput.value);
+  });
+
+  fullnameInput.addEventListener('input', () => {
+    const errorContainer = document.getElementById('fullname-error');
+    errorContainer.innerHTML = '<span aria-hidden="true">⚠️</span> Debes ingresar tu nombre y confirmarlo.';
+  });
 
   /* ==========================================================================
      LÓGICA DEL SELECTOR DE POSICIONES (MODAL)
@@ -384,6 +456,18 @@ document.addEventListener('DOMContentLoaded', () => {
   rsvpForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
+    // Verificar si el nombre está confirmado (es decir, el input tiene readOnly)
+    const isNameConfirmed = fullnameInput.readOnly;
+    if (!isNameConfirmed) {
+      const errorContainer = document.getElementById('fullname-error');
+      errorContainer.innerHTML = '<span aria-hidden="true">⚠️</span> Debes confirmar tu nombre antes de enviar.';
+      errorContainer.style.display = 'flex';
+      fullnameInput.setAttribute('aria-invalid', 'true');
+      fullnameInput.classList.add('user-invalid-fallback');
+      fullnameInput.focus();
+      return;
+    }
+
     // Forzar marcación de dirty y blurred en todos los elementos para validación completa
     const elementsToValidate = [fullnameInput, phoneInput, acceptRulesCheckbox];
     elementsToValidate.forEach(el => {
@@ -519,6 +603,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Permitir edición al pulsar "Modificar mis datos" (Interactividad post-éxito)
   editRsvpBtn.addEventListener('click', () => {
     hideSuccessScreen();
+    
+    // Desbloquear campo de nombre
+    fullnameInput.readOnly = false;
+    fullnameInput.classList.remove('user-valid-fallback');
+    confirmNameBtn.disabled = false;
+    confirmNameBtn.textContent = 'Confirmar';
+    nameMessage.className = 'name-message hidden';
+    nameMessage.textContent = '';
+    
     fullnameInput.focus();
   });
 
