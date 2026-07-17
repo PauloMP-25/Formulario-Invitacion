@@ -143,6 +143,20 @@ document.addEventListener('DOMContentLoaded', () => {
       msgText = '¡Sale su volley shot! 🍹';
     } else if (cleanName === 'grelly') {
       msgText = 'Espero enfrentarnos, cuñadita. 🙌';
+    } else if (cleanName === 'gyro') {
+      msgText = 'aquí tienes tu voley de nivel. 🏐';
+    } else if (cleanName === 'giovanny' || cleanName === 'giovany') {
+      msgText = 'Espero juegues bien mrd. 👊';
+    } else if (cleanName === 'fabrizio') {
+      msgText = 'Vengan temprano tú y Luisana. ⏰';
+    } else if (cleanName === 'luisana') {
+      msgText = 'Vengan temprano tú y Fabrizio. ⏰';
+    } else if (cleanName === 'nicole' || cleanName === 'nicolle') {
+      msgText = 'Gracias por venir. 👋';
+    } else if (cleanName === 'daniel') {
+      msgText = 'Espero que vengan tú y Christina. 🏐';
+    } else if (cleanName === 'christina' || cleanName === 'cristina') {
+      msgText = '¡No falten tú y Daniel! 🏐';
     } else {
       msgText = `¡Qué bueno que te unas, ${trimmedName}! Prepárate para el juego. 👋`;
     }
